@@ -16,7 +16,7 @@ const brandLogos = [amazon, amazon2, casio, moonstar, randstad, star, start_peop
 const Brands = () => {
   return (
     <div className="my-30">
-        <h1 className="text-xl text-secondary font-bold text-center mb-10">We've helped thousands of sales teams</h1>
+        <h1 className="text-xl text-secondary font-bold text-center mb-10">We've helped thousands of sales teams</h1>
       <Swiper
         slidesPerView={4}
         centeredSlides={true}
