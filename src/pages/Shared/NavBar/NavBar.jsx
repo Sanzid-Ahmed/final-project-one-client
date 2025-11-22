@@ -5,7 +5,8 @@ const NavBar = () => {
 
   const links = <>
     <li><NavLink>Services</NavLink></li>
-    <li><a>Item 2</a></li>
+    <li><NavLink>About Us</NavLink></li>
+    <li><NavLink to="/coverage">Coverage</NavLink></li>
   </>
   
   return (
