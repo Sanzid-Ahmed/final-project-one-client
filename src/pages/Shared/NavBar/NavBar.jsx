@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, NavLink } from "react-router";
 import useAuth from "../../../hooks/useAuth";
+import Logo from "../../../Components/Logo/Logo";
 
 const NavBar = () => {
 
@@ -47,7 +48,7 @@ const NavBar = () => {
               {links}
             </ul>
           </div>
-          <a className="btn btn-ghost text-xl">daisyUI</a>
+          <Logo></Logo>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">
@@ -58,7 +59,7 @@ const NavBar = () => {
           {
             user ? <a onClick={handleLogOut} className="btn">Log Out</a> : <Link className="btn" to="/login">Log in</Link>
           }
-          <Link className="btn btn-primary text-black mx-4" to="/">Be e Rider</Link>
+          <Link className="btn btn-primary text-black mx-4" to="/rider">Be e Rider</Link>
         </div>
       </div>
     </div>

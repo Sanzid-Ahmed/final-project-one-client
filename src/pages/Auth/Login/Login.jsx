@@ -1,7 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import useAuth from "../../../hooks/useAuth";
-import { Link } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import SocialLogin from "../SocialLogin/SocialLogin";
 
 const Login = () => {
@@ -9,9 +9,13 @@ const Login = () => {
 
     const { register, handleSubmit, formState: {errors} } = useForm();
     const { signInUser } = useAuth();
+    const location = useLocation();
+    const navigate = useNavigate();
+
     const handleLogin = (data) =>{
         signInUser(data.email, data.password).then(result => {
             console.log(result.user);
+            navigate(location?.state || '/')
         }).catch(error => {
             console.log(error);
         })
@@ -38,7 +42,7 @@ const Login = () => {
           </div>
           <button className="btn btn-neutral mt-4">Login</button>
         </fieldset>
-        <p>New to Zap Shift? <Link className="text-blue-400 underline" to="/register">Register</Link></p>
+        <p>New to Zap Shift? <Link state={location.state} className="text-blue-400 underline" to="/register">Register</Link></p>
       </form>
       <SocialLogin></SocialLogin>
     </div>
