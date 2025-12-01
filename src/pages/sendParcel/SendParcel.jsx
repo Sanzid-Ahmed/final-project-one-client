@@ -1,30 +1,32 @@
 import React from "react";
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import { useLoaderData } from "react-router";
 
 const SendParcel = () => {
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm();
+  // const { register, handleSubmit, watch, formState: { errors } } = useForm();
+  const { register, handleSubmit, control, formState: { errors } } = useForm();
+
+
 
   const serviceCenters = useLoaderData();
   const regionsDuplicate = serviceCenters.map(c => c.region);
 //   const regions = new Set(regionsDuplicate);
   const regions = [...new Set(regionsDuplicate)];
-  const senderRegion = watch('senderRegion');
 
+  
+  // const senderRegion = watch('senderRegion');
+  const senderRegion = useWatch({ control, name: 'senderRegion'});
   const districtsByRegion = region =>{
     const regionDistricts = serviceCenters.filter( c => c.region === region);
     const districts = regionDistricts.map(d => d.district)
     return districts;
   }
 
+
   const handleSendParcel = (data) => {
     console.log(data);
   };
+
 
   return (
     <div>
@@ -135,10 +137,8 @@ const SendParcel = () => {
                 {
                     districtsByRegion(senderRegion).map((r, i) => <option key={i} value={r}>{r}</option>)
                 }
-                
               </select>
             </fieldset>
-            
           </fieldset>
 
           {/* receiver details*/}
