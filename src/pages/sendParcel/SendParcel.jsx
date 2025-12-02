@@ -2,6 +2,8 @@ import React from "react";
 import { useForm, useWatch } from "react-hook-form";
 import { useLoaderData } from "react-router";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import useAuth from '../../hooks/useAuth';
 
 const SendParcel = () => {
   // const { register, handleSubmit, watch, formState: { errors } } = useForm();
@@ -9,8 +11,13 @@ const SendParcel = () => {
     register,
     handleSubmit,
     control,
-    formState: { errors },
+    // formState: { errors },
   } = useForm();
+
+  const { user } = useAuth();
+
+
+  const axiosSecure = useAxiosSecure();
 
   const serviceCenters = useLoaderData();
   const regionsDuplicate = serviceCenters.map((c) => c.region);
@@ -60,11 +67,10 @@ const SendParcel = () => {
       confirmButtonText: "I agree!",
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire({
-          title: "Deleted!",
-          text: "Your file has been deleted.",
-          icon: "success",
-        });
+
+        axiosSecure.post('/parcels', data).then(res => {
+          console.log('After saving parcel', res.data);
+        })
       }
     });
   };
@@ -109,7 +115,7 @@ const SendParcel = () => {
             <label className="label">Parcel Name</label>
             <input
               type="text"
-              {...register("parcelName ")}
+              {...register("parcelName")}
               className="input w-full"
               placeholder="Parcel Name"
             />
@@ -135,7 +141,8 @@ const SendParcel = () => {
             <label className="label">Sender Name</label>
             <input
               type="text"
-              {...register("senderName ")}
+              defaultValue={user?.displayName}
+              {...register("senderName")}
               className="input w-full"
               placeholder="Sender Name"
             />
@@ -144,7 +151,8 @@ const SendParcel = () => {
             <label className="label">Sender Email</label>
             <input
               type="text"
-              {...register("senderEmail ")}
+              defaultValue={user?.email}
+              {...register("senderEmail")}
               className="input w-full"
               placeholder="Sender Email"
             />
@@ -153,7 +161,7 @@ const SendParcel = () => {
             <label className="label mt-4">Sender Address</label>
             <input
               type="text"
-              {...register("senderAddress ")}
+              {...register("senderAddress")}
               className="input w-full"
               placeholder="Sender Address"
             />
@@ -210,7 +218,7 @@ const SendParcel = () => {
             <label className="label">Receiver Email</label>
             <input
               type="text"
-              {...register("receiverEmail ")}
+              {...register("receiverEmail")}
               className="input w-full"
               placeholder="Receiver Email"
             />
@@ -219,7 +227,7 @@ const SendParcel = () => {
             <label className="label mt-4">Receiver Address</label>
             <input
               type="text"
-              {...register("receiverAddress ")}
+              {...register("receiverAddress")}
               className="input w-full"
               placeholder="Receiver Address"
             />
