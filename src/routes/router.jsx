@@ -10,6 +10,7 @@ import Rider from "../pages/Rider/Rider";
 import SendParcel from "../pages/sendParcel/sendParcel";
 import DashboardLayout from "../layouts/DashboardLayout";
 import MyParcels from "../pages/Dashboard/MyParcels/MyParcels";
+import Payment from "../pages/Dashboard/Payment/Payment";
 
 export const router = createBrowserRouter([
   {
@@ -31,7 +32,7 @@ export const router = createBrowserRouter([
 
         },
         {
-            path: "coverage",
+            path: "/coverage",
             Component: Coverage,
             loader: () => fetch('/serviceCenters.json').then(res => res.json())
         }
@@ -52,12 +53,16 @@ export const router = createBrowserRouter([
     ]
   },
   {
-    path: 'dashboard', 
+    path: '/dashboard', 
     element: <PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>, 
     children: [
       {
         path: 'my-parcels', 
         Component: MyParcels,
+      },
+      {
+        path: 'payment/:parcelId',
+        Component: Payment,
       }
     ]
   }

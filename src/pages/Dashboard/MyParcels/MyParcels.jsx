@@ -6,6 +6,7 @@ import { FaRegEdit } from "react-icons/fa";
 import { FcViewDetails } from "react-icons/fc";
 import { MdDelete } from "react-icons/md";
 import Swal from "sweetalert2";
+import { Link } from "react-router";
 
 const MyParcels = () => {
   const { user } = useAuth();
@@ -55,6 +56,8 @@ const MyParcels = () => {
               <th></th>
               <th>Name</th>
               <th>Cost</th>
+              <th>Payment</th>
+              <th>Delivery Status</th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -65,7 +68,15 @@ const MyParcels = () => {
                 <th>{index + 1}</th>
                 <td>{parcel.parcelName}</td>
                 <td>{parcel.cost}</td>
-                <td>Blue</td>
+                <td>{
+                  parcel.deliveryStatus === 'paid' ? 
+                  <span className="text-green-500">Paid</span>
+                  : 
+                  <Link to={`/dashboard/payment/${parcel._id}`}>
+                  <div className="btn btn-sm btn-primary text-black">Pay</div>
+                  </Link>
+                }</td>
+                <td>{parcel.deliveryStatus}</td>
                 <td>
                   <button className="btn btn-square hover:bg-primary">
                     <FaRegEdit />
