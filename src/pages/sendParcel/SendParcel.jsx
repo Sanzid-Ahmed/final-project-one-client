@@ -105,7 +105,7 @@ const SendParcel = () => {
             <input
               type="radio"
               {...register("parcelType")}
-              value="document"
+              value="nonDocument"
               className="radio"
             />
             Non-Document
@@ -212,7 +212,7 @@ const SendParcel = () => {
             <label className="label">Receiver Name</label>
             <input
               type="text"
-              {...register("receiverName ")}
+              {...register("receiverName")}
               className="input w-full"
               placeholder="Receiver Name"
             />
