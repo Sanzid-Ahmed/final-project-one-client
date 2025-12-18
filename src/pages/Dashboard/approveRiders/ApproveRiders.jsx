@@ -8,7 +8,7 @@ import Swal from "sweetalert2";
 
 const ApproveRiders = () => {
   const axiosSecure = useAxiosSecure();
-  const { data: riders = [] } = useQueries({
+  const { refetch, data: riders = [] } = useQueries({
     queryKey: ["riders", "pending"],
     queryFn: async () => {
       const res = await axiosSecure.get("/riders");
@@ -21,7 +21,6 @@ const ApproveRiders = () => {
     const updateInfo = { status: status, email: rider.email };
     axiosSecure.patch(`/riders/${rider._id}`, updateInfo).then((res) => {
       if (res.data.modifiedCount) {
-        // eslint-disable-next-line no-undef
         refetch();
         Swal.fire({
           position: "top-end",
