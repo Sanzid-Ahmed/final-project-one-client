@@ -76,6 +76,7 @@ const MyParcels = () => {
                   <div className="btn btn-sm btn-primary text-black">Pay</div>
                   </Link>
                 }</td>
+                <td>{parcel.trackingId}</td>
                 <td>{parcel.deliveryStatus}</td>
                 <td>
                   <button className="btn btn-square hover:bg-primary">

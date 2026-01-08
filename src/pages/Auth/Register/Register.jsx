@@ -33,7 +33,7 @@ const Register = () => {
               const photoURL =  res.data.data.url;
 
 
-              //NEW create user in the data base:
+              //NEW create user in the data base: 
               const userInfo = {
                 email: data.email,
                 displayName: data.name,
